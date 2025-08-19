@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Internshala Trainings</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #121417;
+      --muted: #637487;
+      --primary: #0ea5e9;
+      --primary-600: #0284c7;
+      --primary-700: #0369a1;
+      --border: #e6e9f0;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --card-bg: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Header Styles */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 12px 150px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      height: 50px;
+      width: 160px;
+    }
+
+    .brand-tag {
+      background: #2aa2ff;
+      color: #fff;
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      margin-left: 40px;
+    }
+
+    /* Mobile Menu Styles */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--text);
+      padding: 8px;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 280px;
+      height: 100vh;
+      background: #fff;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 1001;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+    }
+
+    .mobile-menu.open {
+      left: 0;
+    }
+
+    .mobile-menu-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-menu-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .mobile-menu-content {
+      padding: 20px 0;
+    }
+
+    .mobile-menu-section {
+      margin-bottom: 24px;
+    }
+
+    .mobile-menu-section h3 {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 0 20px 12px;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .mobile-menu-section a {
+      display: block;
+      padding: 12px 20px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .mobile-menu-section a:hover {
+      background: #f8fafc;
+      color: var(--primary);
+      border-left-color: var(--primary);
+    }
+
+    .mobile-menu-section a.popular::after {
+      content: "🔥";
+      margin-left: 8px;
+    }
+
+    .mobile-menu-section a.new::after {
+      content: "NEW";
+      background: var(--primary);
+      color: #fff;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+
+    .mobile-overlay.open {
+      display: block;
+    }
+
+    .nav-item {
+      position: relative;
+      display: inline-block;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      transition: color 0.2s ease;
+      padding: 8px 4px;
+      display: block;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    /* Dropdown Styles */
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      min-width: 280px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      padding: 12px 0;
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 8px 16px;
+      margin-bottom: 4px;
+    }
+
+    .dropdown a {
+      padding: 10px 16px;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 400;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .dropdown a:hover {
+      background: #f8fafc;
+      color: var(--primary);
+      border-left-color: var(--primary);
+    }
+
+    .dropdown a.popular::after {
+      content: "🔥";
+      margin-left: 8px;
+    }
+
+    .dropdown a.new::after {
+      content: "NEW";
+      background: var(--primary);
+      color: #fff;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+
+    .offer {
+      color: var(--warning) !important;
+      font-weight: 700 !important;
+      font-size: 12px;
+      margin-left: 4px;
+    }
+
+    .login {
+      border: 1px solid var(--primary);
+      background: #fff;
+      color: var(--primary);
+      padding: 8px 20px;
+      border-radius: 3px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 14px;
+      height: 45px;
+    }
+
+    .login:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Main Content */
+    main {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .verification-container {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+
+    .verify-box {
+      background: var(--card-bg);
+      padding: 32px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 32px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .verify-box input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.2s ease;
+      background: #fff;
+    }
+
+    .verify-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+    }
+
+    .verify-box input::placeholder {
+      color: var(--muted);
+      
+    }
+
+    .verify-box button {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary);
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(14, 165, 233, 0.2);
+    }
+
+    .verify-box button:hover {
+      background: var(--primary-600);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(14, 165, 233, 0.3);
+    }
+
+    .verify-box button:active {
+      transform: translateY(0);
+    }
+
+    /* Loading Spinner Styles */
+    .loading-container {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      gap: 12px;
+    }
+
+    .loading-container.show {
+      display: flex;
+    }
+
+    .loading-spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #e6e9f0;
+      border-top: 3px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .loading-text {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Certificate Details Card - Reverted to simple style */
+    .details-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: left;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 24px;
+    }
+
+    .certificate-status {
+      color: var(--success);
+      font-weight: 600;
+      margin-bottom: 16px;
+      font-size: 16px;
+    }
+
+    .certificate-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .certificate-id {
+      color: var(--muted);
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .detail-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .detail-item:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .detail-value {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .score-badge {
+      background: var(--success);
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 16px;
+}
+
+.popup-overlay.show {
+  display: flex;
+}
+
+.popup {
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  text-align: left;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.3s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.popup-overlay.show .popup {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.popup-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.popup-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fee2e2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #dc2626;
+  flex-shrink: 0;
+}
+
+.popup p {
+  color: #333;
+  font-size: 16px;
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.popup-button {
+  background: #0284c7;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+  min-width: 80px;
+}
+
+.popup-button:hover {
+  background: #0369a1;
+}
+
+/* Responsive popup styles */
+@media (max-width: 640px) {
+  .popup {
+    padding: 20px;
+    margin: 16px;
+    border-radius: 12px;
+    max-width: none;
+    width: calc(100% - 32px);
+  }
+  
+  .popup-content {
+    gap: 12px;
+  }
+  
+  .popup-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+  
+  .popup p {
+    font-size: 15px;
+  }
+  
+  .popup-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .popup-actions {
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .popup-overlay {
+    padding: 12px;
+  }
+  
+  .popup {
+    padding: 16px;
+    width: 100%;
+    margin: 0;
+  }
+  
+  .popup-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+  }
+  
+  .popup-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+  }
+  
+  .popup p {
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+    /* Footer */
+    .footer {
+      background: #111827;
+      color: #fff;
+      margin-top: 60px;
+      padding: 40px 20px 20px;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-section h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+
+    .footer-section a {
+      display: block;
+      color: #d1d5db;
+      font-size: 14px;
+      margin-bottom: 8px;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--primary);
+    }
+
+    .footer-section a.new::after {
+      content: " NEW";
+      color: var(--warning);
+      font-weight: 700;
+      font-size: 11px;
+      margin-left: 6px;
+      background: rgba(245, 158, 11, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #374151;
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      color: #d1d5db;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .social-links a {
+      color: #d1d5db;
+      text-decoration: none;
+      font-size: 18px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: #374151;
+      transition: all 0.2s ease;
+    }
+
+    .social-links a:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        padding: 16px 20px;
+        
+        justify-content: center;
+        height:50px;
+      }
+      header img{
+        padding-top: 5px;
+      }
+       .brand img {
+      height: 40px;
+      width: 120px;
+    }
+       .login{
+        display: none;
+      }
+
+
+      .brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      nav {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+        position: absolute;
+        left: 20px;
+      }
+
+      .login {
+        position: absolute;
+        right: 20px;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      main {
+        padding: 0 16px;
+        margin: 24px auto;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .verify-box {
+        padding: 24px 20px;
+      }
+
+      .details-card {
+        padding: 20px 16px;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+
+      .footer-links {
+        gap: 16px;
+      }
+
+      .popup {
+        padding: 24px;
+        margin: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .brand-tag {
+        font-size: 10px;
+        padding: 3px 8px;
+      }
+      .login{
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    <div class="brand">
+      <a href="https://trainings.internshala.com/?tracking_source=ist_header_logo"><img src="./internshala.jpeg" alt="Internshala Trainings" /></a>
+      <nav>
+        <div class="nav-item">
+          <a href="#">Certification Courses <span class="offer">OFFER</span></a>
+          <div class="dropdown">
+            <div class="dropdown-title">Popular Courses</div>
+            <a href="https://trainings.internshala.com/web-development-course/?tracking_source=trainings-dropdown-most-popular" class="popular">Web Development with AI</a>
+            <a href="https://trainings.internshala.com/data-science-beginner-course/?tracking_source=trainings-dropdown-most-popular" class="popular">Data Science with AI</a>
+            <a href="https://trainings.internshala.com/python-course/?tracking_source=trainings-dropdown-most-popular">Python Programming with AI</a>
+            <a href="https://trainings.internshala.com/digital-marketing-course/?tracking_source=trainings-dropdown-most-popular" class="new">Digital Marketing with AI</a>
+            <a href="https://trainings.internshala.com/autocad-course/?tracking_source=trainings-dropdown-most-popular">AutoCAD</a>
+            <a href="https://trainings.internshala.com/artificial-intelligence-and-machine-learning-course/?tracking_source=trainings-dropdown-most-popular">Artificial Intelligence & Machine Learning</a>
+            <a href="https://trainings.internshala.com/android-course/?tracking_source=trainings-dropdown-most-popular" class="popular">Android App Development with AI</a>
+            <a href="https://trainings.internshala.com/vibe-coding-with-replit-course/?tracking_source=trainings-dropdown-most-popular">Vibe Coding with Replit</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="#">Placement Guarantee Courses with AI ▾</a>
+          <div class="dropdown">
+            <div class="dropdown-title">Guaranteed Placement</div>
+            <a href="https://trainings.internshala.com/data-science-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses" class="new">Data Science</a>
+            <a href="https://trainings.internshala.com/full-stack-web-development-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses" class="popular">Full Stack Development</a>
+            <a href="https://trainings.internshala.com/electric-vehicles-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses" class="new">Electric Vehicle</a>
+            <a href="https://trainings.internshala.com/digital-marketing-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses">Digital Marketing</a>
+            <a href="https://trainings.internshala.com/software-testing-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses" class="popular">Software Testing</a>
+            <a href="https://trainings.internshala.com/ui-ux-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses">UI/UX Design</a>
+            <a href="https://trainings.internshala.com/product-management-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses" class="new">Product Management</a>
+        
+          </div>
+        </div>
+      </nav>
+    </div>
+    <a href="https://trainings.internshala.com/login/?tracking_source=login"><button class="login">Login</button></a>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <img src="./internshala.jpeg" alt="Internshala" style="height: 24px;" />
+        <span style="font-weight: 600; color: var(--primary);"></span>
+      </div>
+      <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+    </div>
+    <div class="mobile-menu-content">
+      <div class="mobile-menu-section">
+        <h3>Certification Courses</h3>
+        <a href="https://trainings.internshala.com/web-development-course/?tracking_source=trainings-dropdown-most-popular" class="popular">Web Development with AI</a>
+        <a href="https://trainings.internshala.com/data-science-beginner-course/?tracking_source=trainings-dropdown-most-popular" class="popular" class="popular">Data Science with AI</a>
+        <a href="https://trainings.internshala.com/python-course/?tracking_source=trainings-dropdown-most-popular">Python Programming with AI</a>
+
+        <a href="https://trainings.internshala.com/digital-marketing-course/?tracking_source=trainings-dropdown-most-popular">Digital Marketing with AI</a>
+        <a href="https://trainings.internshala.com/autocad-course/?tracking_source=trainings-dropdown-most-popular">AutoCAD</a>
+        <a href="https://trainings.internshala.com/artificial-intelligence-and-machine-learning-course/?tracking_source=trainings-dropdown-most-popular" class="popular">AI & Machine Learning Fundamentals</a>
+        <a href="https://trainings.internshala.com/android-course/?tracking_source=trainings-dropdown-most-popular" class="popular">Android App Development with AI</a>
+        <a href="https://trainings.internshala.com/vibe-coding-with-replit-course/?tracking_source=trainings-dropdown-most-popular">Vibe Coding with Replit</a>
+
+      </div>
+      <div class="mobile-menu-section">
+        <h3>Placement Guarantee Courses</h3>
+        <a href="https://trainings.internshala.com/full-stack-web-development-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses" class="new">Full Stack Development with Placement</a>
+        <a href="https://trainings.internshala.com/data-science-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses" class="popular">Data Science with Placement</a>
+        <a href="https://trainings.internshala.com/electric-vehicles-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses" class="new">Electric Vehicle</a>
+        <a href="https://trainings.internshala.com/digital-marketing-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses">Digital Marketing</a>
+        <a href="https://trainings.internshala.com/software-testing-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses" class="popular">Software Testing</a>
+        <a href="https://trainings.internshala.com/ui-ux-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses">UI/UX Design</a>
+        <a href="https://trainings.internshala.com/product-management-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses" class="new">Product Management</a>
+        
+      </div>
+      <div class="mobile-menu-section">
+        <h3>Popular Categories</h3>
+        <a href="https://trainings.internshala.com/full-stack-web-development-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses">Programming & Development</a>
+        <a href="https://trainings.internshala.com/data-science-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses">Data Science & Analytics</a>
+        <a href="https://trainings.internshala.com/ui-ux-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses">Design & Creative</a>
+        <a href="https://trainings.internshala.com/digital-marketing-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses">Business & Marketing</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Popup -->
+  <div class="popup-overlay" id="errorPopup">
+  <div class="popup">
+    <div class="popup-content">
+      <div class="popup-icon">
+        <span>!</span>
+      </div>
+      <p>This is not a valid certificate. Please recheck the certificate number.</p>
+    </div>
+    <div class="popup-actions">
+      <button class="popup-button" onclick="closeErrorPopup()">Close</button>
+    </div>
+  </div>
+</div>
+
+
+  <main>
+    <div class="verification-container">
+      <h1>Certificate Verification</h1>
+      <p class="subtitle">Enter the certificate ID to verify the authenticity of the certificate</p>
+      
+      <div class="verify-box">
+        <div class="input-group">
+          <input type="text" id="certificateInput" placeholder="Enter certificate number" />
+        </div>
+        <button onclick="showCertificate()">Verify Certificate</button>
+        
+        <!-- Loading Animation -->
+        <div class="loading-container" id="loadingContainer">
+          <div class="loading-spinner"></div>
+          <span class="loading-text">Verifying certificate...</span>
+        </div>
+      </div>
+
+      <div class="details-card" id="certificateDetails" style="display: none;">
+        <div class="certificate-status">✓ Verified Certificate</div>
+        <div class="certificate-title" id="courseTitle">Web Development with AI</div>
+        <div class="certificate-id" id="displayCertId">Certificate ID: 8j7hrekgzxk</div>
+        
+        <div class="detail-item">
+          <span class="detail-label">Student Name:</span>
+          <span class="detail-value" id="studentName">Mr. Gorishankar</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Course Name:</span>
+          <span class="detail-value" id="courseName">Web Development with AI</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Institution:</span>
+          <span class="detail-value" id="institution">DCRUST, MURTHAL</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Certification Date:</span>
+          <span class="detail-value" id="certDate">August 15, 2025</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Final Score:</span>
+          <span class="detail-value"><span class="score-badge" id="finalScore">67%</span></span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Status:</span>
+          <span class="detail-value" style="color: var(--success); font-weight: 600;">✓ Successfully Completed</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>Top AI Courses</h3>
+          <a href="https://trainings.internshala.com/prompt-engineering-course/?tracking_source=trainings-footer-top-ai-courses">Prompt Engineering for GenAI Course</a>
+          <a href="https://trainings.internshala.com/generative-ai-course/?tracking_source=trainings-footer-top-ai-courses">Generative AI Course</a>
+          <a href="https://trainings.internshala.com/vibe-coding-with-replit-course/?tracking_source=trainings-footer-top-ai-courses">Vibe Coding with Replit Course</a>
+          <a href="https://trainings.internshala.com/artificial-intelligence-and-machine-learning-course/?tracking_source=trainings-footer-top-ai-courses">AI & ML Learning Course</a>
+        </div>
+        <div class="footer-section">
+          <h3>IIT Madras Pravartak Certified</h3>
+          <a href="https://trainings.internshala.com/hacking-course/?tracking_source=trainings-footer-iit-madras-pravartak-certified">Ethical Hacking with AI</a>
+          <a href="https://trainings.internshala.com/excel-course/?tracking_source=trainings-footer-iit-madras-pravartak-certified">Advanced Excel with AI</a>
+          <a href="https://trainings.internshala.com/data-science-beginner-course/?tracking_source=trainings-footer-iit-madras-pravartak-certified">Data Science with AI</a>
+          <a href="https://trainings.internshala.com/business-analytics-course/?tracking_source=trainings-footer-iit-madras-pravartak-certified">Business Analytics with AI</a>
+        </div>
+        <div class="footer-section">
+          <h3>Programming</h3>
+          <a href="https://trainings.internshala.com/web-development-course/?tracking_source=trainings-footer-programming">Web Development with AI</a>
+          <a href="https://trainings.internshala.com/java-course/?tracking_source=trainings-footer-programming">Core Java with AI</a>
+          <a href="https://trainings.internshala.com/python-course/?tracking_source=trainings-footer-programming">Python with AI</a>
+          <a href="https://trainings.internshala.com/react-course/?tracking_source=trainings-footer-programming">React with AI</a>
+        </div>
+        <div class="footer-section">
+          <h3>Business & Management</h3>
+          <a href="https://trainings.internshala.com/digital-marketing-course/?tracking_source=trainings-footer-business-and-management">Digital Marketing with AI</a>
+          <a href="https://trainings.internshala.com/financial-modeling-valuation-course/?tracking_source=trainings-footer-business-and-management">Financial Modeling with AI</a>
+          <a href="https://trainings.internshala.com/hr-course/?tracking_source=trainings-footer-business-and-management">HR Management with AI</a>
+        </div>
+        <div class="footer-section">
+          <h3>Core Engineering</h3>
+          <a href="https://trainings.internshala.com/autocad-course/?tracking_source=trainings-footer-core-engineering">AutoCAD</a>
+          <a href="https://trainings.internshala.com/vlsi-design-course/?tracking_source=trainings-footer-core-engineering">VLSI Design</a>
+          <a href="https://trainings.internshala.com/solidworks-course/?tracking_source=trainings-footer-core-engineering">SOLIDWORKS</a>
+        </div>
+        <div class="footer-section">
+          <h3>Data Science</h3>
+          <a href="https://trainings.internshala.com/machine-learning-course/?tracking_source=trainings-footer-data-science">ML with AI</a>
+          <a href="https://trainings.internshala.com/data-science-beginner-course/?tracking_source=trainings-footer-data-science">Data Science with AI</a>
+          <a href="https://trainings.internshala.com/power-bi-course/?tracking_source=trainings-footer-data-science">Power BI with AI</a>
+        </div>
+        <div class="footer-section">
+          <h3>Design</h3>
+          <a href="https://trainings.internshala.com/ui-ux-design-course/?tracking_source=trainings-footer-design">UI/UX</a>
+          <a href="https://trainings.internshala.com/graphic-design-course/?tracking_source=trainings-footer-design">Graphic Design</a>
+          <a href="https://trainings.internshala.com/animation-course/?tracking_source=trainings-footer-design">Animation</a>
+        </div>
+        <div class="footer-section">
+          <h3>Creative Arts</h3>
+          <a href="https://trainings.internshala.com/creative-writing-course/?tracking_source=trainings-footer-creative-arts">Creative Writing</a>
+          <a href="https://trainings.internshala.com/photography-course/?tracking_source=trainings-footer-creative-arts">Photography</a>
+        </div>
+        <div class="footer-section">
+          <h3>Language</h3>
+          <a href="https://trainings.internshala.com/english-speaking-course/?tracking_source=trainings-footer-language">English Speaking</a>
+          <a href="https://trainings.internshala.com/french-course/?tracking_source=trainings-footer-language">French</a>
+        </div>
+        <div class="footer-section">
+          <h3>Career Development</h3>
+          <a href="https://trainings.internshala.com/ppt-course/?tracking_source=trainings-footer-career-development">Job Preparation</a>
+          <a href="https://trainings.internshala.com/how-to-ace-coding-interviews-course/?tracking_source=trainings-footer-career-development">Coding Interviews</a>
+        </div>
+        <div class="footer-section">
+          <h3>Architecture</h3>
+          <a href="https://trainings.internshala.com/autocad-course/?tracking_source=trainings-footer-architecture">AutoCAD Course</a>
+          <a href="https://trainings.internshala.com/revit-course/?tracking_source=trainings-footer-architecture">Revit Course</a>
+        </div>
+        <div class="footer-section">
+          <h3>Placement Guarantee</h3>
+          <a href="https://trainings.internshala.com/data-science-placement-guarantee-course/?tracking_source=trainings-footer-placement-guarantee-courses" class="new">Data Science with Placement</a>
+          <a href="https://trainings.internshala.com/full-stack-web-development-placement-guarantee-course/?tracking_source=trainings-footer-placement-guarantee-courses" class="new">Full Stack Development with Placement</a>
+          <a href="https://trainings.internshala.com/electric-vehicles-placement-guarantee-course/?tracking_source=trainings-footer-placement-guarantee-courses" class="new">EV Course with Placement</a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-links">
+          <a href="https://internshala.com/refund_cancellation_policy">Refund Policy</a>
+          <a href="https://trainings.internshala.com/help_center/?tracking_source=footer">Help Center</a>
+          <a href="https://trainings.internshala.com/sitemap/?tracking_source=footer">Sitemap</a>
+          <a href="https://trainings.internshala.com/blog/?utm_source=trainings-footer">Blog</a>
+          <a href="https://trainings.internshala.com/ist-scholarship/?tracking_source=ist_footer">IST Scholarship</a>
+          <a href="https://internshala.com/terms#student">Terms & Conditions</a>
+          <a href="https://internshala.com/privacy">Privacy Policy</a>
+          <a href="https://trainings.internshala.com/coupon-code-and-offers">Coupon code and offers</a>
+          <a href="https://internshala.com/">Internshala</a>
+        </div>
+        <div class="social-links">
+          <a href="https://www.instagram.com/internshalatrainings_official/" title="Instagram">IG</a>
+          <a href="https://www.linkedin.com/showcase/internshala-trainings/" title="LinkedIn">IN</a>
+          <a href="https://www.youtube.com/channel/UC97qxGRmPsyfV0Miz7AxU2A" title="YouTube">YT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Valid certificate database with user details
+    const validCertificates = {
+      "8j7hrekgx": {
+        studentName: "Mr. Lavish",
+        courseName: "Web Development with AI",
+        courseTitle: "Web Development with AI",
+        institution: "DCRUST, MURTHAL",
+        certificationDate: "August 15, 2025",
+        finalScore: "67%",
+        status: "✓ Successfully Completed"
+      },
+      "8j7hrekgxx": {
+        studentName: "Mr. Priya Sharma",
+        courseName: "Data Science with AI",
+        courseTitle: "Data Science with AI",
+        institution: "IIT Delhi",
+        certificationDate: "August 10, 2025",
+        finalScore: "85%",
+        status: "✓ Successfully Completed"
+      },
+      "DEF456GHI": {
+        studentName: "Mr. Rahul Kumar",
+        courseName: "Python Programming with AI",
+        courseTitle: "Python Programming with AI",
+        institution: "NIT Kurukshetra",
+        certificationDate: "August 5, 2025",
+        finalScore: "78%",
+        status: "✓ Successfully Completed"
+      },
+      "JKL789MNO": {
+        studentName: "Ms. Anjali Singh",
+        courseName: "Digital Marketing with AI",
+        courseTitle: "Digital Marketing with AI",
+        institution: "Delhi University",
+        certificationDate: "August 12, 2025",
+        finalScore: "92%",
+        status: "✓ Successfully Completed"
+      },
+      "PQR012STU": {
+        studentName: "Mr. Vikash Gupta",
+        courseName: "Android App Development with AI",
+        courseTitle: "Android App Development with AI",
+        institution: "Punjabi University",
+        certificationDate: "August 8, 2025",
+        finalScore: "73%",
+        status: "✓ Successfully Completed"
+      }
+    };
+
+    function showCertificate() {
+      const input = document.getElementById('certificateInput');
+      const details = document.getElementById('certificateDetails');
+      const loadingContainer = document.getElementById('loadingContainer');
+      const certificateId = input.value.trim();
+      
+      if (!certificateId) {
+        showErrorPopup();
+        return;
+      }
+
+      // Show loading animation
+      loadingContainer.classList.add('show');
+      details.style.display = 'none';
+
+      // Simulate verification delay (1.5 seconds)
+      setTimeout(() => {
+        // Hide loading animation
+        loadingContainer.classList.remove('show');
+
+        // Check if certificate ID exists in our database
+        if (validCertificates.hasOwnProperty(certificateId)) {
+          const certData = validCertificates[certificateId];
+          
+          // Update certificate details with the matched data
+          document.getElementById('courseTitle').textContent = certData.courseTitle;
+          document.getElementById('displayCertId').textContent = `Certificate ID: ${certificateId}`;
+          document.getElementById('studentName').textContent = certData.studentName;
+          document.getElementById('courseName').textContent = certData.courseName;
+          document.getElementById('institution').textContent = certData.institution;
+          document.getElementById('certDate').textContent = certData.certificationDate;
+          document.getElementById('finalScore').textContent = certData.finalScore;
+          
+          // Show the certificate details
+          details.style.display = 'block';
+          details.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          // Show error popup for invalid certificate ID
+          showErrorPopup();
+        }
+      }, 1500); // 1.5 second delay for loading effect
+    }
+
+    function showErrorPopup() {
+      const popup = document.getElementById('errorPopup');
+      popup.classList.add('show');
+    }
+
+    function closeErrorPopup() {
+      const popup = document.getElementById('errorPopup');
+      popup.classList.remove('show');
+    }
+
+    // Close popup when clicking outside
+    document.getElementById('errorPopup').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeErrorPopup();
+      }
+    });
+
+    // Allow Enter key to trigger verification
+    document.getElementById('certificateInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        showCertificate();
+      }
+    });
+
+    // Mobile menu functions
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('mobileOverlay');
+      
+      menu.classList.toggle('open');
+      overlay.classList.toggle('open');
+    }
+
+    function closeMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('mobileOverlay');
+      
+      menu.classList.remove('open');
+      overlay.classList.remove('open');
+    }
+  </script>
+</body>
+</html>
