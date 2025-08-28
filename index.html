@@ -294,87 +294,88 @@
 
     /* Main Content */
     main {
-      max-width: 1000px;
-      margin: 40px auto;
+      max-width: 500px;
+      margin: 60px auto;
       padding: 0 20px;
     }
 
     .verification-container {
       text-align: center;
-      max-width: 600px;
+      max-width: 500px;
       margin: 0 auto;
     }
 
     h1 {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--text);
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 40px;
+      color: #333;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
 
     .subtitle {
-      color: var(--muted);
-      font-size: 16px;
-      margin-bottom: 40px;
+      display: none;
     }
 
     .verify-box {
-      background: var(--card-bg);
-      padding: 32px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
+      background: #fff;
+      padding: 0;
+      border-radius: 0;
+      border: none;
       margin-bottom: 32px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      box-shadow: none;
     }
 
     .input-group {
       position: relative;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .verify-box input {
       width: 100%;
-      padding: 14px 16px;
-      border: 2px solid var(--border);
-      border-radius: 8px;
+      padding: 16px 20px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
       font-size: 16px;
       transition: border-color 0.2s ease;
       background: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: #333;
     }
 
     .verify-box input:focus {
       outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+      border-color: #007bff;
+      box-shadow: none;
     }
 
     .verify-box input::placeholder {
-      color: var(--muted);
-      
+      color: #999;
     }
 
     .verify-box button {
       width: 100%;
-      padding: 14px;
-      background: var(--primary);
+      padding: 16px;
+      background: #1fb6ff;
       border: none;
       color: #fff;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 16px;
-      border-radius: 8px;
+      border-radius: 4px;
       cursor: pointer;
       transition: all 0.2s ease;
-      box-shadow: 0 2px 4px rgba(14, 165, 233, 0.2);
+      box-shadow: none;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
 
     .verify-box button:hover {
-      background: var(--primary-600);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(14, 165, 233, 0.3);
+      background: #0ea5e9;
+      transform: none;
+      box-shadow: none;
     }
 
     .verify-box button:active {
-      transform: translateY(0);
+      transform: none;
     }
 
     /* Loading Spinner Styles */
@@ -410,226 +411,194 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Certificate Details Card - Reverted to simple style */
-    .details-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 24px;
+    /* Certificate Details - New Clean Layout */
+    .certificate-details {
+      display: none;
+      margin-top: 32px;
       text-align: left;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin-bottom: 24px;
+      background: #fff;
     }
 
-    .certificate-status {
-      color: var(--success);
-      font-weight: 600;
-      margin-bottom: 16px;
-      font-size: 16px;
+    .certificate-details.show {
+      display: block;
     }
 
-    .certificate-title {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-
-    .certificate-id {
-      color: var(--muted);
-      font-family: 'Courier New', monospace;
-      font-size: 14px;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .detail-item {
+    .detail-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid #f0f0f0;
+      padding: 16px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
     }
 
-    .detail-item:last-child {
+    .detail-row:last-child {
       border-bottom: none;
     }
 
     .detail-label {
-      font-weight: 600;
-      color: var(--text);
-      font-size: 14px;
-    }
-
-    .detail-value {
-      font-size: 14px;
-      color: var(--muted);
+      color: #666;
       font-weight: 500;
     }
 
-    .score-badge {
-      background: var(--success);
-      color: #fff;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-weight: 600;
-      font-size: 12px;
+    .detail-value {
+      color: #333;
+      font-weight: 500;
     }
 
     .popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-  padding: 16px;
-}
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      padding: 16px;
+    }
 
-.popup-overlay.show {
-  display: flex;
-}
+    .popup-overlay.show {
+      display: flex;
+    }
 
-.popup {
-  background: #fff;
-  padding: 24px;
-  border-radius: 8px;
-  text-align: left;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  transform: scale(0.9);
-  opacity: 0;
-  transition: all 0.3s ease;
-  max-height: 90vh;
-  overflow-y: auto;
-}
+    .popup {
+      background: #fff;
+      padding: 24px;
+      border-radius: 8px;
+      text-align: left;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      transform: scale(0.9);
+      opacity: 0;
+      transition: all 0.3s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
 
-.popup-overlay.show .popup {
-  transform: scale(1);
-  opacity: 1;
-}
+    .popup-overlay.show .popup {
+      transform: scale(1);
+      opacity: 1;
+    }
 
-.popup-content {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-}
+    .popup-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
 
-.popup-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: #fee2e2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  font-weight: bold;
-  color: #dc2626;
-  flex-shrink: 0;
-}
+    .popup-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #fee2e2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: #dc2626;
+      flex-shrink: 0;
+    }
 
-.popup p {
-  color: #333;
-  font-size: 16px;
-  margin: 0;
-  line-height: 1.4;
-  flex: 1;
-}
+    .popup p {
+      color: #333;
+      font-size: 16px;
+      margin: 0;
+      line-height: 1.4;
+      flex: 1;
+    }
 
-.popup-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
+    .popup-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
 
-.popup-button {
-  background: #0284c7;
-  color: #fff;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.2s ease;
-  min-width: 80px;
-}
+    .popup-button {
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s ease;
+      min-width: 80px;
+    }
 
-.popup-button:hover {
-  background: #0369a1;
-}
+    .popup-button:hover {
+      background: #0369a1;
+    }
 
-/* Responsive popup styles */
-@media (max-width: 640px) {
-  .popup {
-    padding: 20px;
-    margin: 16px;
-    border-radius: 12px;
-    max-width: none;
-    width: calc(100% - 32px);
-  }
-  
-  .popup-content {
-    gap: 12px;
-  }
-  
-  .popup-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-  }
-  
-  .popup p {
-    font-size: 15px;
-  }
-  
-  .popup-button {
-    padding: 10px 20px;
-    font-size: 14px;
-    width: 100%;
-  }
-  
-  .popup-actions {
-    margin-top: 16px;
-  }
-}
+    /* Responsive popup styles */
+    @media (max-width: 640px) {
+      .popup {
+        padding: 20px;
+        margin: 16px;
+        border-radius: 12px;
+        max-width: none;
+        width: calc(100% - 32px);
+      }
+      
+      .popup-content {
+        gap: 12px;
+      }
+      
+      .popup-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+      
+      .popup p {
+        font-size: 15px;
+      }
+      
+      .popup-button {
+        padding: 10px 20px;
+        font-size: 14px;
+        width: 100%;
+      }
+      
+      .popup-actions {
+        margin-top: 16px;
+      }
+    }
 
-@media (max-width: 480px) {
-  .popup-overlay {
-    padding: 12px;
-  }
-  
-  .popup {
-    padding: 16px;
-    width: 100%;
-    margin: 0;
-  }
-  
-  .popup-content {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 16px;
-  }
-  
-  .popup-icon {
-    width: 56px;
-    height: 56px;
-    font-size: 24px;
-  }
-  
-  .popup p {
-    font-size: 14px;
-    text-align: center;
-  }
-}
+    @media (max-width: 480px) {
+      .popup-overlay {
+        padding: 12px;
+      }
+      
+      .popup {
+        padding: 16px;
+        width: 100%;
+        margin: 0;
+      }
+      
+      .popup-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 16px;
+      }
+      
+      .popup-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 24px;
+      }
+      
+      .popup p {
+        font-size: 14px;
+        text-align: center;
+      }
+    }
 
     /* Footer */
     .footer {
@@ -738,21 +707,22 @@
     @media (max-width: 768px) {
       header {
         padding: 16px 20px;
-        
         justify-content: center;
-        height:50px;
+        height: 50px;
       }
-      header img{
+      
+      header img {
         padding-top: 5px;
       }
-       .brand img {
-      height: 40px;
-      width: 120px;
-    }
-       .login{
+      
+      .brand img {
+        height: 40px;
+        width: 120px;
+      }
+      
+      .login {
         display: none;
       }
-
 
       .brand {
         position: absolute;
@@ -770,11 +740,6 @@
         left: 20px;
       }
 
-      .login {
-        position: absolute;
-        right: 20px;
-      }
-
       .mobile-menu {
         display: block;
       }
@@ -786,14 +751,6 @@
 
       h1 {
         font-size: 24px;
-      }
-
-      .verify-box {
-        padding: 24px 20px;
-      }
-
-      .details-card {
-        padding: 20px 16px;
       }
 
       .footer-grid {
@@ -810,96 +767,14 @@
         margin: 20px;
       }
     }
-main {
-      max-width: 500px;
-      margin: 60px auto;
-      padding: 0 20px;
-    }
 
-    .verification-container {
-      text-align: center;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      font-size: 28px;
-      font-weight: 600;
-      margin-bottom: 40px;
-      color: #333;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    }
-
-    .subtitle {
-      display: none;
-    }
-
-    .verify-box {
-      background: #fff;
-      padding: 0;
-      border-radius: 0;
-      border: none;
-      margin-bottom: 32px;
-      box-shadow: none;
-    }
-
-    .input-group {
-      position: relative;
-      margin-bottom: 16px;
-    }
-
-    .verify-box input {
-      width: 100%;
-      padding: 16px 20px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 16px;
-      transition: border-color 0.2s ease;
-      background: #fff;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      color: #333;
-    }
-
-    .verify-box input:focus {
-      outline: none;
-      border-color: #007bff;
-      box-shadow: none;
-    }
-
-    .verify-box input::placeholder {
-      color: #999;
-    }
-
-    .verify-box button {
-      width: 100%;
-      padding: 16px;
-      background: #1fb6ff;
-      border: none;
-      color: #fff;
-      font-weight: 500;
-      font-size: 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: none;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    }
-
-    .verify-box button:hover {
-      background: #0ea5e9;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .verify-box button:active {
-      transform: none;
-    }
     @media (max-width: 480px) {
       .brand-tag {
         font-size: 10px;
         padding: 3px 8px;
       }
-      .login{
+      
+      .login {
         display: none;
       }
 
@@ -940,7 +815,6 @@ main {
             <a href="https://trainings.internshala.com/software-testing-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses" class="popular">Software Testing</a>
             <a href="https://trainings.internshala.com/ui-ux-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses">UI/UX Design</a>
             <a href="https://trainings.internshala.com/product-management-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses" class="new">Product Management</a>
-        
           </div>
         </div>
       </nav>
@@ -964,13 +838,11 @@ main {
         <a href="https://trainings.internshala.com/web-development-course/?tracking_source=trainings-dropdown-most-popular" class="popular">Web Development with AI</a>
         <a href="https://trainings.internshala.com/data-science-beginner-course/?tracking_source=trainings-dropdown-most-popular" class="popular" class="popular">Data Science with AI</a>
         <a href="https://trainings.internshala.com/python-course/?tracking_source=trainings-dropdown-most-popular">Python Programming with AI</a>
-
         <a href="https://trainings.internshala.com/digital-marketing-course/?tracking_source=trainings-dropdown-most-popular">Digital Marketing with AI</a>
         <a href="https://trainings.internshala.com/autocad-course/?tracking_source=trainings-dropdown-most-popular">AutoCAD</a>
         <a href="https://trainings.internshala.com/artificial-intelligence-and-machine-learning-course/?tracking_source=trainings-dropdown-most-popular" class="popular">AI & Machine Learning Fundamentals</a>
         <a href="https://trainings.internshala.com/android-course/?tracking_source=trainings-dropdown-most-popular" class="popular">Android App Development with AI</a>
         <a href="https://trainings.internshala.com/vibe-coding-with-replit-course/?tracking_source=trainings-dropdown-most-popular">Vibe Coding with Replit</a>
-
       </div>
       <div class="mobile-menu-section">
         <h3>Placement Guarantee Courses</h3>
@@ -981,7 +853,6 @@ main {
         <a href="https://trainings.internshala.com/software-testing-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses" class="popular">Software Testing</a>
         <a href="https://trainings.internshala.com/ui-ux-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses">UI/UX Design</a>
         <a href="https://trainings.internshala.com/product-management-placement-guarantee-course/?tracking_source=trainings-dropdown-placement-guarantee-courses" class="new">Product Management</a>
-        
       </div>
       <div class="mobile-menu-section">
         <h3>Popular Categories</h3>
@@ -995,30 +866,28 @@ main {
 
   <!-- Error Popup -->
   <div class="popup-overlay" id="errorPopup">
-  <div class="popup">
-    <div class="popup-content">
-      <div class="popup-icon">
-        <span>!</span>
+    <div class="popup">
+      <div class="popup-content">
+        <div class="popup-icon">
+          <span>!</span>
+        </div>
+        <p>This is not a valid certificate. Please recheck the certificate number.</p>
       </div>
-      <p>This is not a valid certificate. Please recheck the certificate number.</p>
-    </div>
-    <div class="popup-actions">
-      <button class="popup-button" onclick="closeErrorPopup()">Close</button>
+      <div class="popup-actions">
+        <button class="popup-button" onclick="closeErrorPopup()">Close</button>
+      </div>
     </div>
   </div>
-</div>
-
 
   <main>
     <div class="verification-container">
       <h1>Certificate Verification</h1>
-      <p class="subtitle">Enter the certificate ID to verify the authenticity of the certificate</p>
       
       <div class="verify-box">
         <div class="input-group">
-          <input type="text" id="certificateInput" placeholder="Enter certificate number" value="8j7hrekgx"/>
+          <input type="text" id="certificateInput" placeholder="8j7hrekgxzk" value="8j7hrekgx"/>
         </div>
-        <button onclick="showCertificate()">Verify Certificate</button>
+        <button onclick="showCertificate()">Verify</button>
         
         <!-- Loading Animation -->
         <div class="loading-container" id="loadingContainer">
@@ -1027,34 +896,27 @@ main {
         </div>
       </div>
 
-      <div class="details-card" id="certificateDetails" style="display: none;">
-        <div class="certificate-status">✓ Verified Certificate</div>
-        <div class="certificate-title" id="courseTitle">Web Development with AI</div>
-        <div class="certificate-id" id="displayCertId">Certificate ID: 8j7hrekgzxk</div>
-        
-        <div class="detail-item">
-          <span class="detail-label">Student Name:</span>
+      <!-- New Certificate Details Layout -->
+      <div class="certificate-details" id="certificateDetails">
+        <div class="detail-row">
+          <span class="detail-label">Name:</span>
           <span class="detail-value" id="studentName">Mr. Gorishankar</span>
         </div>
-        <div class="detail-item">
-          <span class="detail-label">Course Name:</span>
+        <div class="detail-row">
+          <span class="detail-label">Training name:</span>
           <span class="detail-value" id="courseName">Web Development with AI</span>
         </div>
-        <div class="detail-item">
-          <span class="detail-label">Institution:</span>
+        <div class="detail-row">
+          <span class="detail-label">College name:</span>
           <span class="detail-value" id="institution">DCRUST, MURTHAL</span>
         </div>
-        <div class="detail-item">
-          <span class="detail-label">Certification Date:</span>
-          <span class="detail-value" id="certDate">August 15, 2025</span>
+        <div class="detail-row">
+          <span class="detail-label">Final Test Score:</span>
+          <span class="detail-value" id="finalScore">67%</span>
         </div>
-        <div class="detail-item">
-          <span class="detail-label">Final Score:</span>
-          <span class="detail-value"><span class="score-badge" id="finalScore">67%</span></span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Status:</span>
-          <span class="detail-value" style="color: var(--success); font-weight: 600;">✓ Successfully Completed</span>
+        <div class="detail-row">
+          <span class="detail-label">Date of certification:</span>
+          <span class="detail-value" id="certDate">2025-08-15</span>
         </div>
       </div>
     </div>
@@ -1165,7 +1027,7 @@ main {
         courseName: "Web Development with AI",
         courseTitle: "Web Development with AI",
         institution: "DCRUST, MURTHAL",
-        certificationDate: "August 02, 2025",
+        certificationDate: "2025-08-15",
         finalScore: "67%",
         status: "✓ Successfully Completed"
       },
@@ -1174,7 +1036,7 @@ main {
         courseName: "Data Science with AI",
         courseTitle: "Data Science with AI",
         institution: "IIT Delhi",
-        certificationDate: "August 10, 2025",
+        certificationDate: "2025-08-10",
         finalScore: "85%",
         status: "✓ Successfully Completed"
       },
@@ -1183,7 +1045,7 @@ main {
         courseName: "Python Programming with AI",
         courseTitle: "Python Programming with AI",
         institution: "NIT Kurukshetra",
-        certificationDate: "August 5, 2025",
+        certificationDate: "2025-08-05",
         finalScore: "78%",
         status: "✓ Successfully Completed"
       },
@@ -1192,7 +1054,7 @@ main {
         courseName: "Digital Marketing with AI",
         courseTitle: "Digital Marketing with AI",
         institution: "Delhi University",
-        certificationDate: "August 12, 2025",
+        certificationDate: "2025-08-12",
         finalScore: "92%",
         status: "✓ Successfully Completed"
       },
@@ -1201,7 +1063,7 @@ main {
         courseName: "Android App Development with AI",
         courseTitle: "Android App Development with AI",
         institution: "Punjabi University",
-        certificationDate: "August 8, 2025",
+        certificationDate: "2025-08-08",
         finalScore: "73%",
         status: "✓ Successfully Completed"
       }
@@ -1220,7 +1082,7 @@ main {
 
       // Show loading animation
       loadingContainer.classList.add('show');
-      details.style.display = 'none';
+      details.classList.remove('show');
 
       // Simulate verification delay (1.5 seconds)
       setTimeout(() => {
@@ -1232,8 +1094,6 @@ main {
           const certData = validCertificates[certificateId];
           
           // Update certificate details with the matched data
-          document.getElementById('courseTitle').textContent = certData.courseTitle;
-          document.getElementById('displayCertId').textContent = `Certificate ID: ${certificateId}`;
           document.getElementById('studentName').textContent = certData.studentName;
           document.getElementById('courseName').textContent = certData.courseName;
           document.getElementById('institution').textContent = certData.institution;
@@ -1241,7 +1101,7 @@ main {
           document.getElementById('finalScore').textContent = certData.finalScore;
           
           // Show the certificate details
-          details.style.display = 'block';
+          details.classList.add('show');
           details.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
           // Show error popup for invalid certificate ID
@@ -1292,7 +1152,4 @@ main {
     }
   </script>
 </body>
-
 </html>
-
-
